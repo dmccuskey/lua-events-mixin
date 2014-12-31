@@ -188,6 +188,7 @@ function Events:createCallback( method )
 end
 
 function Events.setDebug( self, value )
+	assert( type(value) == 'boolean', "setDebug requires boolean" )
 	self.__debug_on = value
 end
 
