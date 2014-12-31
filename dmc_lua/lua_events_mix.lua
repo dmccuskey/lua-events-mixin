@@ -78,6 +78,20 @@ local function _createEventListenerKey( e_name, handler )
 end
 
 
+
+-- return event unmodified
+--
+function _createCoronaEvent( obj, event )
+	return event
+end
+
+
+
+-- obj, 
+-- event type
+-- data
+-- params
+--
 function _createDmcEvent( obj, e_type, data, params )
 	params = params or {}
 	if params.merge == nil then params.merge = true end
@@ -182,10 +196,10 @@ function Events.setEventFunc( self, func )
 end
 
 
-function Events.dispatchEvent( self, e_type, data, params )
-	-- print( "Events.dispatchEvent", e_type )
+function Events.dispatchEvent( self, ... )
+	-- print( "Events.dispatchEvent" )
 	local f = self.__event_func
-	self:_dispatchEvent( f( self, e_type, data, params ) )
+	self:_dispatchEvent( f( self, ... ) )
 end
 
 
@@ -286,8 +300,11 @@ end
 
 return {
 	EventsMix=Events,
+
 	dmcEventFunc=_createDmcEvent,
-	patch=_patch
+	coronaEventFunc=_createCoronaEvent,
+
+	patch=_patch,
 }
 
 
