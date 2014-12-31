@@ -124,6 +124,7 @@ function _patch( obj )
 
 	-- add properties
 	Events.__init__( obj )
+	obj.EVENT = Events.EVENT -- generic event name
 
 	-- add methods
 	obj.dispatchEvent = Events.dispatchEvent
