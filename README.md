@@ -3,7 +3,7 @@
 Add event capability to your Lua objects (event dispatch/listeners)
 
 
-This module can add Event capability to any of your objects. It can be used either as a mixin class or monkey-patching your object. It was designed to work with [lua-objects](https://github.com/dmccuskey/dmc-objects). It has been integrated in [dmc-objects](https://github.com/dmccuskey/dmc-objects) as a mixin. 
+This module can add Event capability to any of your objects. It can be used either as a mixin class or by "monkey-patching" your object. It was designed to work with [lua-objects](https://github.com/dmccuskey/dmc-objects) and has also been integrated in [dmc-objects](https://github.com/dmccuskey/dmc-objects) as a mixin.
 
 
 ### Features ###
@@ -12,15 +12,17 @@ This module can add Event capability to any of your objects. It can be used eith
 * removeEventListener
 * dipatchEvent
 * custom events
-* unit tested
+* unit tests
 
 
-#### Examples ####
+### Examples ###
+
+#### Mixin Class ####
 
 The project [dmc-objects](https://github.com/dmccuskey/dmc-objects) contains the `ObjectBase` sub-class which shows how to use this module as a mixin with multiple inheritance.
 
 
-### Monkey Patching ###
+#### Monkey Patching ####
 
 
 ```lua
@@ -51,11 +53,12 @@ local obj = EventsMix.patch()  -- returns a new object
 
 --== Methods
 
--- obj.EVENT is automatically added. can be changed
+-- obj.EVENT constant is automatically added to your object, it can be changed
 --
 obj:addEventListener( obj.EVENT, callback )
 obj:removeEventListener( obj.EVENT, callback )
 
+obj.EVENT = 'obj_event' -- EVENT can be changed
 obj.EVENT_NAME = 'my_custom_event_name' -- add this
 obj:dispatchEvent( obj.EVENT_NAME, data )
 
