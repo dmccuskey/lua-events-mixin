@@ -1,6 +1,9 @@
---[[
-Unit Testing for lua_events_mix using Busted
---]]
+--====================================================================--
+-- spec/lua_events_mix_spec.lua
+--
+-- Testing for lua-events-mixin using Busted
+--====================================================================--
+
 
 package.path = './dmc_lua/?.lua;' .. package.path
 
@@ -89,16 +92,14 @@ describe( "Module Test: test inheritance", function()
 		it( "can set debug flag", function()
 			assert( obj.__event_func == dmcEventFunc )
 
-			local f = function() end 
+			local f = function() end
 			obj:setEventFunc( f )
 			assert( obj.__event_func == f )
 		end)
-	
+
 	end)
 
 end)
-
-
 
 
 describe( "Module Test: test patch function", function()
@@ -137,7 +138,7 @@ describe( "Module Test: test patch function", function()
 			obj:setDebug( false )
 			assert( obj.__debug_on == false )
 		end)
-	
+
 	end)
 
 end)
