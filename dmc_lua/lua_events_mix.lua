@@ -1,7 +1,7 @@
 --====================================================================--
--- mixin_events.lua
+-- dmc_lua/lua_events_mix.lua
 --
--- Documentation: http://docs.davidmccuskey.com/display/docs/mixin_events.lua
+-- Documentation: http://docs.davidmccuskey.com/
 --====================================================================--
 
 --[[
@@ -33,7 +33,7 @@ SOFTWARE.
 
 
 --====================================================================--
---== DMC Lua Library : Events Mixin
+--== DMC Lua Library : Lua Events Mixin
 --====================================================================--
 
 
@@ -87,7 +87,7 @@ end
 
 
 
--- obj, 
+-- obj,
 -- event type
 -- data
 -- params
@@ -148,6 +148,10 @@ Events = {}
 
 Events.EVENT = 'event_mix_event'
 
+
+--======================================================--
+-- Start: Mixin Setup for Lua Objects
+
 function Events.__init__( self, params )
 	-- print( "Events.__init__" )
 	params = params or {}
@@ -166,16 +170,19 @@ function Events.__init__( self, params )
 	--]]
 	self.__event_listeners = {}  -- holds event listeners
 
-	self.__debug_on = false 
+	self.__debug_on = false
 	self.__event_func = params.event_func or _createDmcEvent
 end
 
 function Events.__undoInit__( self )
 	-- print( "Events.__undoInit__" )
 	self.__event_listeners = nil
-	self.__debug_on = nil 
+	self.__debug_on = nil
 	self.__event_func = nil
 end
+
+-- END: Mixin Setup for Lua Objects
+--======================================================--
 
 
 
@@ -184,7 +191,7 @@ end
 
 
 function Events:createCallback( method )
-	return Utils.createObjectCallback( self, method )	
+	return Utils.createObjectCallback( self, method )
 end
 
 function Events.setDebug( self, value )
