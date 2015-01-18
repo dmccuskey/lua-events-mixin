@@ -9,17 +9,16 @@ except:
 module_config = {
 	"name": "lua-events-mixin",
 	"module": {
+		"dir": "dmc_lua",
 		"files": [
 				"lua_events_mix.lua"
 		],
-		"requires": [
-		]
+		"requires": []
 	},
 	"tests": {
-		"files": [
-		],
-		"requires": [
-		]
+		"dir": "spec",
+		"files": [],
+		"requires": []
 	}
 }
 
