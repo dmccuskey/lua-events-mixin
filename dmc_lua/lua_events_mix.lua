@@ -190,7 +190,7 @@ end
 --== Public Methods
 
 
-function Events:createCallback( method )
+function Events.createCallback( self, method )
 	return Utils.createObjectCallback( self, method )
 end
 
