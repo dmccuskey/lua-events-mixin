@@ -25,7 +25,7 @@ Here it is in a nutshell:
 
 ```lua
 -- import the events mixin module (adjust path for your project)
-local EventsMixModule = require 'dmc_corona.lib.dmc_lua.lua_events_mix'
+local EventsMixModule = require 'dmc_lua.lua_events_mix'
 
 -- create ref to mixin (optional)
 local EventsMix = EventsMixModule.EventsMix
