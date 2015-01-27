@@ -3,7 +3,7 @@
 Add event capability to your Lua objects (event dispatch/listeners)
 
 
-This module can add Event capability to any of your objects. It can be used either as a mixin class or by "monkey-patching" your object. It was designed to work with [lua-objects](https://github.com/dmccuskey/dmc-objects) and has also been integrated in [dmc-objects](https://github.com/dmccuskey/dmc-objects) as a mixin.
+This module can add Event capability to any of your objects. It can be used either as a mixin class or by "monkey-patching" your object. It was designed to work with [lua-objects](https://github.com/dmccuskey/lua-objects) and has also been integrated in [dmc-objects](https://github.com/dmccuskey/dmc-objects) as a mixin.
 
 
 ### Features ###
