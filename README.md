@@ -21,6 +21,19 @@ This module can add Event capability to any of your objects. It can be used eith
 
 The project [dmc-objects](https://github.com/dmccuskey/dmc-objects) contains the `ObjectBase` sub-class which shows how to use this module as a mixin with multiple inheritance.
 
+Here it is in a nutshell:
+
+```lua
+-- import the events mixin module (adjust path for your project)
+local EventsMixModule = require 'dmc_corona.lib.dmc_lua.lua_events_mix'
+
+-- create ref to mixin (optional)
+local EventsMix = EventsMixModule.EventsMix
+
+-- do multiple inheritance !
+local ObjectBase = newClass( { Class, EventsMix }, { name="Object Class" } )
+```
+
 
 #### Monkey Patching ####
 
