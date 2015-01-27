@@ -31,7 +31,7 @@ local EventsMixModule = require 'dmc_lua.lua_events_mix'
 local EventsMix = EventsMixModule.EventsMix
 
 -- do multiple inheritance !
-local ObjectBase = newClass( { Class, EventsMix }, { name="Object Class" } )
+local ObjectBase = newClass( { Class, EventsMix } )
 
 
 -- Then call init method in your OO Framework construction phase
