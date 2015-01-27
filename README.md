@@ -32,6 +32,25 @@ local EventsMix = EventsMixModule.EventsMix
 
 -- do multiple inheritance !
 local ObjectBase = newClass( { Class, EventsMix }, { name="Object Class" } )
+
+
+-- Then call init method in your OO Framework construction phase
+
+-- with dmc-objects
+	self:superCall( EventsMix, '__init__', ... )
+
+-- with other frameworks
+	EventsMix.__init__( self, ... )
+
+
+-- When destroying, you can call __undoInit__
+
+-- with dmc-objects
+	self:superCall( EventsMix, '__undoInit__' )
+
+-- with other frameworks
+	EventsMix.__undoInit__( self )
+
 ```
 
 
