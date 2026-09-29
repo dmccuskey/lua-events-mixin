@@ -61,6 +61,8 @@ local type = type
 
 
 --== Start: copy from lua_utils ==--
+-- Copied, not required, so this file loads on its own, without
+-- lua_utils. A fix to the function in lua_utils goes here too.
 
 function Utils.createObjectCallback( object, method )
 	assert( object ~= nil, "missing object in Utils.createObjectCallback" )
