@@ -169,6 +169,8 @@ None known. Version 0.3.0 fixed those of 0.2.2: `removeEventListener()` raised a
 
 Only `dmc_lua/lua_events_mix.lua` is written here. [DMC-Lua-Library](https://github.com/dmccuskey/DMC-Lua-Library) copies it into its `dmc_lua/` with its Snakemake build (the `Snakefile` here registers it), and the DMC Solar2D libraries copy it from there into `dmc_corona/lib/dmc_lua/`.
 
+It requires no other module: its one helper, `createObjectCallback()`, is copied from [lua-utils](https://github.com/dmccuskey/lua-utils) (marked `copy from lua_utils` in the source). A fix to that function in lua-utils has to be made here too.
+
 The tests are in `spec/lua_events_mix_spec.lua`, for [busted](https://lunarmodules.github.io/busted/) under Lua 5.1. From the repository's root folder:
 
 ```sh
