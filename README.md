@@ -113,6 +113,7 @@ To send events of your own shape, set an event function with `setEventFunc()`, o
 | `EventsMix` | The mixin: a table of the methods, to use as a parent class (below). |
 | `dmcEventFunc` | The default event function: builds the table above. |
 | `coronaEventFunc` | An event function that returns its argument as the event. |
+| `__version` | The module's version, `'0.3.0'`. |
 
 ### Methods
 
@@ -121,15 +122,15 @@ On a patched object, or an instance of a class that mixes in `EventsMix`:
 | method | does |
 |---|---|
 | `addEventListener( name, listener )` | Adds a function or object listener for events named `name`. Adding the same one twice prints a warning and keeps one. |
-| `removeEventListener( name, listener )` | Removes it. Prints a warning when it isn't there. |
+| `removeEventListener( name, listener )` | Removes it. Prints a warning when it isn't there, or nothing listens to `name`. |
 | `dispatchEvent( ... )` | Builds an event with the event function (by default from `( type, data, params )`, above) and calls the listeners for its `name`. |
 | `dispatchRawEvent( event )` | Calls the listeners for `event.name` with `event` as is. It must be a table with a `name`. |
 | `setEventFunc( func )` | Sets the event function, called as `func( obj, ... )` with `dispatchEvent()`'s arguments. |
-| `setDebug( bool )` | Stores a debug flag; nothing reads it. |
-| `createEvent( ... )` | Mixin only: returns the event `dispatchEvent( ... )` would send. |
-| `createCallback( method )` | Mixin only: returns a function that calls `method( obj, ... )`. |
+| `setDebug( bool )` | While on, prints each event dispatched: `Events:dispatchEvent`, its name and its type, whether or not anything listens. |
+| `createEvent( ... )` | Returns the event `dispatchEvent( ... )` would send. |
+| `createCallback( method )` | Returns a function that calls `method( obj, ... )`. |
 
-Listeners are called in no set order.
+Listeners are called in no set order. A listener added during a dispatch is called from the next one; a listener removed during a dispatch, before its turn, isn't called. An object listener without a method named after the event is skipped with the warning `WARNING: Events dispatchEvent <name>`.
 
 ### As a Mixin
 
@@ -162,13 +163,7 @@ EventsMix.__init__( obj )
 
 ## Known Issues
 
-- **`removeEventListener()` errors when nothing listens to that name**: after the warning `no listeners found` it raises `attempt to index local 'listeners' (a nil value)`.
-- A patched object gets neither `createEvent()` nor `createCallback()`.
-- A listener added from inside a listener, during a dispatch, may or may not be called in that dispatch (Lua leaves adding keys during `pairs()` undefined).
-- An object listener without the event's method is skipped with `WARNING: Events dispatchEvent <name>`.
-- Listeners are keyed by `tostring( listener )`, so objects whose `__tostring` returns the same string replace each other.
-- `setDebug()` does nothing. `addEventListener()` has a second, unreachable check that calls a missing `Utils.propertyIn`.
-- The version, `0.2.2`, isn't exported: it's a local in the file.
+None known. Version 0.3.0 fixed those of 0.2.2: `removeEventListener()` raised an error when nothing listened to the name; patched objects lacked `createEvent()` and `createCallback()`; a listener added during a dispatch might be called in it; objects whose `tostring()` matched replaced each other as listeners; `setDebug()` did nothing; the version wasn't exported.
 
 ## Development
 
@@ -183,10 +178,10 @@ busted spec
 It ends with:
 
 ```text
-7 successes / 0 failures / 0 errors / 0 pending : 0.001437 seconds
+20 successes / 0 failures / 0 errors / 0 pending : 0.002664 seconds
 ```
 
-The tests check that the mixin and `patch()` add the methods and properties, not that events reach listeners.
+The tests check that the mixin and `patch()` add the methods and properties, and how events reach listeners (adding, removing, and changing listeners during a dispatch).
 
 ## License
 
